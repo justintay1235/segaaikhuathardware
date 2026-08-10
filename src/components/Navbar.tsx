@@ -27,6 +27,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Every page except Home opens with a dark maroon hero (PageHero), so the
+  // unscrolled navbar needs light text there; Home's hero is light, so it
+  // needs dark text. Once scrolled, the navbar always gets a light backdrop.
+  const onDarkHero = pathname !== "/" && !scrolled;
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
@@ -37,7 +42,7 @@ export default function Navbar() {
     >
       <nav className="mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between">
         <Link href="/" aria-label="Sega Pumps home">
-          <Logo />
+          <Logo light={onDarkHero} />
         </Link>
 
         <ul className="hidden md:flex items-center gap-10">
@@ -48,7 +53,13 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   className={`underline-grow text-[0.8rem] uppercase tracking-[0.18em] transition-colors ${
-                    active ? "text-maroon-800 font-medium" : "text-maroon-900/70 hover:text-maroon-800"
+                    onDarkHero
+                      ? active
+                        ? "text-ivory-50 font-medium"
+                        : "text-ivory-200/80 hover:text-ivory-50"
+                      : active
+                      ? "text-maroon-800 font-medium"
+                      : "text-maroon-900/70 hover:text-maroon-800"
                   }`}
                 >
                   {link.label}
@@ -60,7 +71,11 @@ export default function Navbar() {
 
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center px-6 py-2.5 text-[0.75rem] uppercase tracking-[0.18em] font-medium border border-maroon-800/50 text-maroon-800 hover:bg-maroon-800 hover:text-ivory-50 transition-all duration-500"
+          className={`hidden md:inline-flex items-center px-6 py-2.5 text-[0.75rem] uppercase tracking-[0.18em] font-medium border transition-all duration-500 ${
+            onDarkHero
+              ? "border-ivory-50/50 text-ivory-50 hover:bg-ivory-50 hover:text-maroon-950"
+              : "border-maroon-800/50 text-maroon-800 hover:bg-maroon-800 hover:text-ivory-50"
+          }`}
         >
           Get a Quote
         </Link>
@@ -68,7 +83,7 @@ export default function Navbar() {
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden text-maroon-800"
+          className={onDarkHero ? "md:hidden text-ivory-50" : "md:hidden text-maroon-800"}
         >
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
