@@ -28,6 +28,7 @@ export default async function EditProductPage({
           name: product.name,
           tagline: product.tagline,
           icon: product.icon,
+          imageUrl: product.imageUrl,
           specs: JSON.parse(product.specsJson),
           featured: product.featured,
           order: product.order,

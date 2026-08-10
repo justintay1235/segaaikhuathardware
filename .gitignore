@@ -46,3 +46,6 @@ next-env.d.ts
 # prisma sqlite database files
 /prisma/*.db
 /prisma/*.db-journal
+
+# admin-uploaded product photos
+/public/uploads

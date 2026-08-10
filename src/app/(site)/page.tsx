@@ -180,6 +180,7 @@ export default async function Home() {
                   name={product.name}
                   tagline={product.tagline}
                   specs={JSON.parse(product.specsJson)}
+                  imageUrl={product.imageUrl}
                 />
               </Reveal>
             ))}

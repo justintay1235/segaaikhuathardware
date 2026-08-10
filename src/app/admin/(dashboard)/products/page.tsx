@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Pencil, Plus, Star, Trash2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getProductIcon } from "@/lib/icons";
@@ -33,9 +34,15 @@ export default async function AdminProductsPage() {
           const specs: string[] = JSON.parse(product.specsJson);
           return (
             <div key={product.id} className="flex items-center gap-5 p-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-maroon-50 text-maroon-800">
-                <Icon size={20} strokeWidth={1.5} />
-              </div>
+              {product.imageUrl ? (
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-maroon-50">
+                  <Image src={product.imageUrl} alt="" fill className="object-cover" unoptimized />
+                </div>
+              ) : (
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-maroon-50 text-maroon-800">
+                  <Icon size={20} strokeWidth={1.5} />
+                </div>
+              )}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <h3 className="font-display text-lg text-maroon-950 truncate">{product.name}</h3>

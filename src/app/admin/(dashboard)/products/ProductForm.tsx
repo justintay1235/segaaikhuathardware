@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import Image from "next/image";
+import { useActionState, useState } from "react";
 import { PRODUCT_ICON_OPTIONS } from "@/lib/icons";
 import type { ProductFormState } from "./actions";
 
@@ -11,6 +12,7 @@ type ProductFormValues = {
   name: string;
   tagline: string;
   icon: string;
+  imageUrl: string | null;
   specs: string[];
   featured: boolean;
   order: number;
@@ -26,6 +28,7 @@ const defaults: ProductFormValues = {
   name: "",
   tagline: "",
   icon: PRODUCT_ICON_OPTIONS[0],
+  imageUrl: null,
   specs: [],
   featured: false,
   order: 0,
@@ -34,6 +37,8 @@ const defaults: ProductFormValues = {
 export default function ProductForm({ action, initialValues, submitLabel }: ProductFormProps) {
   const values = initialValues ?? defaults;
   const [state, formAction, pending] = useActionState(action, {});
+  const [preview, setPreview] = useState<string | null>(values.imageUrl);
+  const [removeImage, setRemoveImage] = useState(false);
 
   return (
     <form action={formAction} className="flex flex-col gap-8 border border-maroon-900/10 bg-ivory-50 p-9 max-w-2xl">
@@ -58,6 +63,47 @@ export default function ProductForm({ action, initialValues, submitLabel }: Prod
         <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">Tagline</span>
         <input required name="tagline" defaultValue={values.tagline} className={inputClasses} />
       </label>
+
+      <div className="flex flex-col gap-3">
+        <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">Photo</span>
+        {preview && !removeImage && (
+          <div className="relative h-32 w-32 overflow-hidden border border-maroon-900/10">
+            <Image src={preview} alt="" fill className="object-cover" unoptimized />
+          </div>
+        )}
+        <input
+          type="file"
+          name="image"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              setPreview(URL.createObjectURL(file));
+              setRemoveImage(false);
+            }
+          }}
+          className="text-sm text-maroon-900/80 file:mr-4 file:px-4 file:py-2 file:border-0 file:bg-maroon-50 file:text-maroon-800 file:text-xs file:uppercase file:tracking-[0.15em]"
+        />
+        {values.imageUrl && (
+          <label className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              name="removeImage"
+              checked={removeImage}
+              onChange={(e) => {
+                setRemoveImage(e.target.checked);
+                if (e.target.checked) setPreview(null);
+                else setPreview(values.imageUrl);
+              }}
+              className="h-4 w-4 accent-maroon-800"
+            />
+            <span className="text-sm text-maroon-900/80">Remove current photo</span>
+          </label>
+        )}
+        <p className="text-xs text-maroon-900/50">
+          JPEG, PNG, WebP, or GIF, up to 5MB. Falls back to the icon above if no photo is set.
+        </p>
+      </div>
 
       <label className="flex flex-col gap-2">
         <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">

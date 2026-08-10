@@ -12,6 +12,7 @@ model Product {
   name      String
   tagline   String
   icon      String
+  imageUrl  String?
   specsJson String
   featured  Boolean  @default(false)
   order     Int      @default(0)

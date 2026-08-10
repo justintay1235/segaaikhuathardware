@@ -33,7 +33,8 @@ for the real thing before launch (see "Content to replace" below).
 
 ```bash
 npm install
-cp .env.example .env   # only if .env doesn't already exist
+cp .env.example .env   # Windows: copy .env.example .env — only if .env doesn't already exist
+npx prisma generate    # generates the Prisma client into src/generated/prisma
 npx prisma migrate dev # creates prisma/dev.db and applies the schema
 npx prisma db seed     # seeds starter products + the admin account
 npm run dev
@@ -52,6 +53,8 @@ Sign in at `/admin/login` with the credentials from your `.env`
 - View inquiry/product counts on the dashboard
 - Create, edit, and delete products (shown on `/products`; check "featured"
   to also show one on the homepage, up to 3)
+- Upload a photo per product (JPEG/PNG/WebP/GIF, up to 5MB) — falls back to
+  the icon if no photo is set
 - Read and manage contact form submissions from `/contact`
 
 **Change the seeded admin password after your first login**, and generate
@@ -70,11 +73,16 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   `postgresql` and point `DATABASE_URL` at a hosted Postgres instance
   (Neon, Supabase, etc.) — Prisma's `db-setup` skill/docs cover the swap.
 - To inspect or edit data directly, run `npx prisma studio`.
+- Uploaded product photos are saved to `public/uploads/products/` (gitignored,
+  not committed) — like the SQLite file, this is local disk storage, so it
+  won't persist on serverless/ephemeral-filesystem hosting. For that kind of
+  deployment, swap the upload handler in `src/lib/uploads.ts` for an object
+  storage service (S3, Cloudflare R2, Vercel Blob, etc.).
 
 ## Content to replace before launch
 
 - Real logo (currently a text wordmark in `src/components/Logo.tsx`)
-- Real product photography (currently an abstract SVG emblem placeholder)
+- Real product photos — upload them per product from `/admin/products`
 - Actual address, phone, email, and business hours (`src/components/Footer.tsx`, `src/app/(site)/contact/page.tsx`)
 - Company history/timeline copy in `src/app/(site)/about/page.tsx`
 - The seeded admin credentials — change the password immediately after login
