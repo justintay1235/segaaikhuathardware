@@ -52,7 +52,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`underline-grow text-[0.8rem] uppercase tracking-[0.18em] transition-colors ${
+                  className={`underline-grow text-[0.8rem] uppercase tracking-[0.18em] transition-colors duration-500 ${
                     onDarkHero
                       ? active
                         ? "text-ivory-50 font-medium"
@@ -83,7 +83,9 @@ export default function Navbar() {
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className={onDarkHero ? "md:hidden text-ivory-50" : "md:hidden text-maroon-800"}
+          className={`md:hidden transition-colors duration-500 ${
+            onDarkHero ? "text-ivory-50" : "text-maroon-800"
+          }`}
         >
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
