@@ -1,29 +1,22 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
+import { submitContact, type ContactState } from "@/app/(site)/contact/actions";
 
 const inputClasses =
   "w-full border-b border-maroon-900/20 bg-transparent py-3 text-sm text-maroon-950 placeholder:text-maroon-900/40 focus:border-maroon-800 focus:outline-none transition-colors";
 
-export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+const initialState: ContactState = { success: false };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    window.setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 900);
-  };
+export default function ContactForm() {
+  const [state, formAction, pending] = useActionState(submitContact, initialState);
 
   return (
     <div className="relative border border-maroon-900/10 bg-ivory-50 p-9 sm:p-12">
       <AnimatePresence mode="wait">
-        {submitted ? (
+        {state.success ? (
           <motion.div
             key="success"
             initial={{ opacity: 0, y: 10 }}
@@ -38,12 +31,6 @@ export default function ContactForm() {
               Thank you for reaching out — an engineer from our team will
               respond within one business day.
             </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="mt-2 text-xs uppercase tracking-[0.2em] text-maroon-800 underline-grow"
-            >
-              Send another message
-            </button>
           </motion.div>
         ) : (
           <motion.form
@@ -51,7 +38,7 @@ export default function ContactForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onSubmit={handleSubmit}
+            action={formAction}
             className="flex flex-col gap-8"
           >
             <div className="grid sm:grid-cols-2 gap-8">
@@ -59,7 +46,7 @@ export default function ContactForm() {
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
                   Full Name
                 </span>
-                <input required type="text" placeholder="Jane Doe" className={inputClasses} />
+                <input required name="name" type="text" placeholder="Jane Doe" className={inputClasses} />
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
@@ -67,6 +54,7 @@ export default function ContactForm() {
                 </span>
                 <input
                   required
+                  name="email"
                   type="email"
                   placeholder="jane@company.com"
                   className={inputClasses}
@@ -79,13 +67,13 @@ export default function ContactForm() {
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
                   Phone
                 </span>
-                <input type="tel" placeholder="+234 800 000 0000" className={inputClasses} />
+                <input name="phone" type="tel" placeholder="+234 800 000 0000" className={inputClasses} />
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
                   Interest
                 </span>
-                <select required defaultValue="" className={inputClasses}>
+                <select name="interest" required defaultValue="" className={inputClasses}>
                   <option value="" disabled>
                     Select an option
                   </option>
@@ -104,19 +92,22 @@ export default function ContactForm() {
               </span>
               <textarea
                 required
+                name="message"
                 rows={4}
                 placeholder="Tell us about your project..."
                 className={`${inputClasses} resize-none`}
               />
             </label>
 
+            {state.error && <p className="text-sm text-red-600">{state.error}</p>}
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={pending}
               className="group inline-flex items-center justify-center gap-2.5 self-start px-8 py-3.5 text-[0.8rem] uppercase tracking-[0.18em] font-medium bg-maroon-800 text-ivory-50 hover:bg-maroon-950 transition-all duration-500 disabled:opacity-60"
             >
-              <span>{loading ? "Sending..." : "Send Message"}</span>
-              {!loading && (
+              <span>{pending ? "Sending..." : "Send Message"}</span>
+              {!pending && (
                 <span className="transition-transform duration-500 group-hover:translate-x-1">
                   &rarr;
                 </span>

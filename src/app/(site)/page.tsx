@@ -1,13 +1,4 @@
-import {
-  Award,
-  Clock,
-  Droplets,
-  Factory,
-  ShieldCheck,
-  Sun,
-  Users,
-  Wrench,
-} from "lucide-react";
+import { Award, Clock, ShieldCheck, Users, Wrench } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
 import SectionHeading from "@/components/SectionHeading";
@@ -15,27 +6,10 @@ import StatCounter from "@/components/StatCounter";
 import PumpEmblem from "@/components/PumpEmblem";
 import ProductCard from "@/components/ProductCard";
 import TestimonialCard from "@/components/TestimonialCard";
+import { prisma } from "@/lib/prisma";
+import { getProductIcon } from "@/lib/icons";
 
-const FEATURED_PRODUCTS = [
-  {
-    icon: Droplets,
-    name: "Centrifugal Series",
-    tagline: "High-flow pumps engineered for consistent industrial output.",
-    specs: ["Up to 500 m³/h", "IE3 motors", "Cast-iron body"],
-  },
-  {
-    icon: Factory,
-    name: "Submersible Series",
-    tagline: "Borewell and drainage pumps built to endure the depths.",
-    specs: ["Up to 200m head", "Stainless shaft", "Sand-resistant"],
-  },
-  {
-    icon: Sun,
-    name: "Solar Series",
-    tagline: "Off-grid pumping for agriculture, powered by the sun.",
-    specs: ["MPPT controller", "DC brushless", "Zero fuel cost"],
-  },
-];
+export const dynamic = "force-dynamic";
 
 const FEATURES = [
   {
@@ -60,7 +34,13 @@ const FEATURES = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const featuredProducts = await prisma.product.findMany({
+    where: { featured: true },
+    orderBy: { order: "asc" },
+    take: 3,
+  });
+
   return (
     <>
       {/* Hero */}
@@ -193,9 +173,14 @@ export default function Home() {
             description="From industrial mainlines to solar-powered fields, each series is engineered around one principle: relentless reliability."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {FEATURED_PRODUCTS.map((product, i) => (
-              <Reveal key={product.name} delay={i * 0.08}>
-                <ProductCard {...product} />
+            {featuredProducts.map((product, i) => (
+              <Reveal key={product.id} delay={i * 0.08}>
+                <ProductCard
+                  icon={getProductIcon(product.icon)}
+                  name={product.name}
+                  tagline={product.tagline}
+                  specs={JSON.parse(product.specsJson)}
+                />
               </Reveal>
             ))}
           </div>

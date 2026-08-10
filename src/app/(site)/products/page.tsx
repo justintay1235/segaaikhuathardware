@@ -1,10 +1,11 @@
-import { Droplets, Gauge, Home, Sun, Tractor, Waves } from "lucide-react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
+import { prisma } from "@/lib/prisma";
+import { getProductIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
   title: "Products | Sega Pumps",
@@ -12,46 +13,11 @@ export const metadata: Metadata = {
     "Explore Sega's full range of water pumps — centrifugal, submersible, solar, industrial, agricultural, and residential.",
 };
 
-const PRODUCTS = [
-  {
-    icon: Droplets,
-    name: "Centrifugal Series",
-    tagline: "High-flow pumps engineered for consistent industrial output.",
-    specs: ["Up to 500 m³/h", "IE3 premium motors", "Cast-iron / SS body", "Max head 90m"],
-  },
-  {
-    icon: Waves,
-    name: "Submersible Series",
-    tagline: "Borewell and drainage pumps built to endure the depths.",
-    specs: ["Up to 200m head", "Stainless steel shaft", "Sand-resistant seals", "4\"-8\" bore fit"],
-  },
-  {
-    icon: Sun,
-    name: "Solar Series",
-    tagline: "Off-grid pumping for agriculture, powered by the sun.",
-    specs: ["MPPT controller", "DC brushless motor", "Zero fuel cost", "Remote monitoring"],
-  },
-  {
-    icon: Gauge,
-    name: "Industrial Booster Systems",
-    tagline: "Pressure-stable multi-pump skids for demanding facilities.",
-    specs: ["Variable frequency drive", "Redundant pump sets", "PLC control panel", "24/7 duty rated"],
-  },
-  {
-    icon: Tractor,
-    name: "Agricultural Series",
-    tagline: "Irrigation-ready pumps for fields, farms, and estates.",
-    specs: ["Diesel & electric options", "High debris tolerance", "Portable skid mounts", "Long-throw discharge"],
-  },
-  {
-    icon: Home,
-    name: "Residential Series",
-    tagline: "Quiet, compact pumps for homes and light commercial use.",
-    specs: ["Whisper-quiet operation", "Compact footprint", "Auto pressure control", "5-year warranty"],
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await prisma.product.findMany({ orderBy: { order: "asc" } });
+
   return (
     <>
       <PageHero
@@ -69,9 +35,14 @@ export default function ProductsPage() {
             italicWord="your challenge."
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PRODUCTS.map((product, i) => (
-              <Reveal key={product.name} delay={(i % 3) * 0.08}>
-                <ProductCard {...product} />
+            {products.map((product, i) => (
+              <Reveal key={product.id} delay={(i % 3) * 0.08}>
+                <ProductCard
+                  icon={getProductIcon(product.icon)}
+                  name={product.name}
+                  tagline={product.tagline}
+                  specs={JSON.parse(product.specsJson)}
+                />
               </Reveal>
             ))}
           </div>
