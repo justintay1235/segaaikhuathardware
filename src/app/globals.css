@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fffdfb;
+  --foreground: #2a1013;
+
+  /* Maroon scale */
+  --color-maroon-50: #fbf1f2;
+  --color-maroon-100: #f4dde0;
+  --color-maroon-200: #e7b9c0;
+  --color-maroon-300: #d68d97;
+  --color-maroon-400: #bd5f6d;
+  --color-maroon-500: #9f3d4d;
+  --color-maroon-600: #7f1f2f;
+  --color-maroon-700: #641524;
+  --color-maroon-800: #4b0f1a;
+  --color-maroon-900: #350a12;
+  --color-maroon-950: #22060b;
+
+  /* Ivory / neutral scale */
+  --color-ivory-50: #fffdfb;
+  --color-ivory-100: #fbf6f1;
+  --color-ivory-200: #f3e9e0;
+  --color-ivory-300: #e6d5c8;
+  --color-ivory-400: #cbb09e;
+
+  --color-gold-400: #c9a24d;
+  --color-gold-500: #b08a35;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-maroon-50: var(--color-maroon-50);
+  --color-maroon-100: var(--color-maroon-100);
+  --color-maroon-200: var(--color-maroon-200);
+  --color-maroon-300: var(--color-maroon-300);
+  --color-maroon-400: var(--color-maroon-400);
+  --color-maroon-500: var(--color-maroon-500);
+  --color-maroon-600: var(--color-maroon-600);
+  --color-maroon-700: var(--color-maroon-700);
+  --color-maroon-800: var(--color-maroon-800);
+  --color-maroon-900: var(--color-maroon-900);
+  --color-maroon-950: var(--color-maroon-950);
+
+  --color-ivory-50: var(--color-ivory-50);
+  --color-ivory-100: var(--color-ivory-100);
+  --color-ivory-200: var(--color-ivory-200);
+  --color-ivory-300: var(--color-ivory-300);
+  --color-ivory-400: var(--color-ivory-400);
+
+  --color-gold-400: var(--color-gold-400);
+  --color-gold-500: var(--color-gold-500);
+
+  --font-display: var(--font-bodoni), "Didot", "Bodoni Moda", Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-maroon-600);
+  color: var(--color-ivory-50);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-maroon-600) 45%, transparent),
+    transparent
+  );
+}
+
+.underline-grow {
+  position: relative;
+}
+
+.underline-grow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.underline-grow:hover::after {
+  transform: scaleX(1);
+}
+
+.bg-noise {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in srgb, var(--color-maroon-900) 6%, transparent) 1px,
+    transparent 0
+  );
+  background-size: 22px 22px;
+}
