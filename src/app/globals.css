@@ -60,7 +60,7 @@
 
   --color-brand: var(--color-brand);
 
-  --font-display: "Microgramma", "Eurostile Extended", var(--font-orbitron), "Arial Black", sans-serif;
+  --font-display: "Microgramma", "Eurostile Extended", var(--font-exo2), "Arial Black", sans-serif;
   --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 }
 

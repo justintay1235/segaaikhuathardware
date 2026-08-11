@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Orbitron, Jost } from "next/font/google";
+import { Exo_2, Jost } from "next/font/google";
 import "./globals.css";
 
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
+const exo2 = Exo_2({
+  variable: "--font-exo2",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   weight: ["700", "800", "900"],
 });
 
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${jost.variable} h-full antialiased`}
+      className={`${exo2.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory-50 text-maroon-950">
         {children}
