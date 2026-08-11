@@ -129,7 +129,7 @@ export default function ServicesPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((service, i) => (
               <Reveal key={service.title} delay={i * 0.06}>
-                <div className="group h-full flex flex-col gap-5 border border-maroon-900/10 bg-ivory-50 p-9 transition-shadow duration-500 hover:shadow-[0_24px_60px_-24px_rgba(75,15,26,0.35)]">
+                <div className="group h-full flex flex-col gap-5 border border-maroon-900/10 bg-ivory-50 p-9 transition-shadow duration-500 hover:shadow-[0_24px_60px_-24px_rgba(92,0,0,0.35)]">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-maroon-50 text-maroon-800 transition-colors duration-500 group-hover:bg-maroon-800 group-hover:text-ivory-50">
                     <service.icon size={24} strokeWidth={1.5} />
                   </div>

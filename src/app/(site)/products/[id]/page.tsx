@@ -76,7 +76,7 @@ export default async function ProductDetailPage({
                 </div>
               ) : (
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-maroon-100 via-ivory-200 to-maroon-200 flex items-center justify-center">
-                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-maroon-800 text-ivory-50 shadow-[0_24px_60px_-16px_rgba(75,15,26,0.5)]">
+                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-maroon-800 text-ivory-50 shadow-[0_24px_60px_-16px_rgba(92,0,0,0.5)]">
                     <IconBadge icon={getProductIcon(product.icon)} />
                   </div>
                 </div>

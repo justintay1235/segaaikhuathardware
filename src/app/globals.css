@@ -4,18 +4,18 @@
   --background: #fffdfb;
   --foreground: #2a1013;
 
-  /* Maroon scale */
-  --color-maroon-50: #fbf1f2;
-  --color-maroon-100: #f4dde0;
-  --color-maroon-200: #e7b9c0;
-  --color-maroon-300: #d68d97;
-  --color-maroon-400: #bd5f6d;
-  --color-maroon-500: #9f3d4d;
-  --color-maroon-600: #7f1f2f;
-  --color-maroon-700: #641524;
-  --color-maroon-800: #4b0f1a;
-  --color-maroon-900: #350a12;
-  --color-maroon-950: #22060b;
+  /* Maroon scale — red family anchored on brand red #D40000 at the 500 step */
+  --color-maroon-50: #ffeeee;
+  --color-maroon-100: #ffd1d1;
+  --color-maroon-200: #ff9e9e;
+  --color-maroon-300: #ff6666;
+  --color-maroon-400: #ff1f1f;
+  --color-maroon-500: #d40000;
+  --color-maroon-600: #9e0000;
+  --color-maroon-700: #7a0000;
+  --color-maroon-800: #5c0000;
+  --color-maroon-900: #3d0000;
+  --color-maroon-950: #290000;
 
   /* Ivory / neutral scale */
   --color-ivory-50: #fffdfb;
