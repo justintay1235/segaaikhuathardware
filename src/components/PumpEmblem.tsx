@@ -28,7 +28,7 @@ export default function PumpEmblem({ className = "" }: { className?: string }) {
         ))}
       </motion.div>
       <motion.div
-        className="absolute inset-[18%] rounded-full bg-gradient-to-br from-maroon-700 via-maroon-800 to-maroon-950 shadow-[0_30px_80px_-20px_rgba(75,15,26,0.55)] flex items-center justify-center"
+        className="absolute inset-[18%] rounded-full bg-gradient-to-br from-maroon-700 via-maroon-800 to-maroon-950 shadow-[0_30px_80px_-20px_rgba(92,0,0,0.55)] flex items-center justify-center"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}

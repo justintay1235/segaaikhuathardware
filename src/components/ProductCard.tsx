@@ -11,7 +11,7 @@ export type Product = {
 
 export default function ProductCard({ icon: Icon, name, tagline, specs, imageUrl }: Product) {
   return (
-    <div className="group relative overflow-hidden border border-maroon-900/10 bg-ivory-50 flex flex-col gap-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-24px_rgba(75,15,26,0.35)]">
+    <div className="group relative overflow-hidden border border-maroon-900/10 bg-ivory-50 flex flex-col gap-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-24px_rgba(92,0,0,0.35)]">
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-maroon-700 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center z-10" />
 
       {imageUrl ? (
