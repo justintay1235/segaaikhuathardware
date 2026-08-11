@@ -60,7 +60,7 @@
 
   --color-brand: var(--color-brand);
 
-  --font-display: var(--font-bodoni), "Didot", "Bodoni Moda", Georgia, serif;
+  --font-display: "Microgramma", "Eurostile Extended", var(--font-orbitron), "Arial Black", sans-serif;
   --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -85,7 +85,8 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .hairline {

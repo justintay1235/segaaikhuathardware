@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Jost } from "next/font/google";
+import { Orbitron, Jost } from "next/font/google";
 import "./globals.css";
 
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["700", "800", "900"],
 });
 
 const jost = Jost({
@@ -25,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${bodoni.variable} ${jost.variable} h-full antialiased`}
+      className={`${orbitron.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory-50 text-maroon-950">
         {children}
