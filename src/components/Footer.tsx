@@ -2,29 +2,23 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Logo from "./Logo";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "./SocialIcons";
+import { prisma } from "@/lib/prisma";
+import { ADDRESS, MAPS_HREF } from "@/lib/contact";
 
-const COLUMNS = [
-  {
-    title: "Explore",
-    links: [
-      { href: "/about", label: "About Sega" },
-      { href: "/products", label: "Products" },
-      { href: "/services", label: "Services" },
-      { href: "/contact", label: "Contact" },
-    ],
-  },
-  {
-    title: "Products",
-    links: [
-      { href: "/products", label: "Centrifugal Pumps" },
-      { href: "/products", label: "Submersible Pumps" },
-      { href: "/products", label: "Solar Pumps" },
-      { href: "/products", label: "Industrial Systems" },
-    ],
-  },
+const EXPLORE_LINKS = [
+  { href: "/about", label: "About Sega" },
+  { href: "/products", label: "Products" },
+  { href: "/services", label: "Services" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export default function Footer() {
+export default async function Footer() {
+  const products = await prisma.product.findMany({
+    orderBy: { order: "asc" },
+    take: 4,
+    select: { id: true, name: true },
+  });
+
   return (
     <footer className="bg-maroon-950 text-ivory-100">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-14 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
@@ -47,31 +41,50 @@ export default function Footer() {
           </div>
         </div>
 
-        {COLUMNS.map((col) => (
-          <div key={col.title} className="flex flex-col gap-4">
-            <p className="text-xs uppercase tracking-[0.3em] text-gold-400">{col.title}</p>
-            <ul className="flex flex-col gap-3">
-              {col.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-ivory-300 hover:text-ivory-50 transition-colors underline-grow"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div className="flex flex-col gap-4">
+          <p className="text-xs uppercase tracking-[0.3em] text-gold-400">Explore</p>
+          <ul className="flex flex-col gap-3">
+            {EXPLORE_LINKS.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-ivory-300 hover:text-ivory-50 transition-colors underline-grow"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <p className="text-xs uppercase tracking-[0.3em] text-gold-400">Products</p>
+          <ul className="flex flex-col gap-3">
+            {products.map((product) => (
+              <li key={product.id}>
+                <Link
+                  href={`/products/${product.id}`}
+                  className="text-sm text-ivory-300 hover:text-ivory-50 transition-colors underline-grow"
+                >
+                  {product.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div className="flex flex-col gap-4">
           <p className="text-xs uppercase tracking-[0.3em] text-gold-400">Reach Us</p>
           <div className="flex flex-col gap-3 text-sm text-ivory-300">
-            <span className="flex items-start gap-3">
+            <a
+              href={MAPS_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 hover:text-ivory-50 transition-colors"
+            >
               <MapPin size={16} className="mt-0.5 shrink-0 text-gold-400" />
-              Lot 14, Jalan Perindustrian, Shah Alam, Selangor, Malaysia
-            </span>
+              {ADDRESS}
+            </a>
             <span className="flex items-center gap-3">
               <Phone size={16} className="shrink-0 text-gold-400" />
               +60 12-345 6789

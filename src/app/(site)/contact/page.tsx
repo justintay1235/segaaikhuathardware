@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import { prisma } from "@/lib/prisma";
+import { ADDRESS_LINES, MAPS_HREF } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Contact | Sega Pumps",
@@ -18,7 +19,8 @@ const INFO = [
   {
     icon: MapPin,
     title: "Visit Us",
-    lines: ["Lot 14, Jalan Perindustrian", "Shah Alam, Selangor, Malaysia"],
+    lines: ADDRESS_LINES,
+    href: MAPS_HREF,
   },
   {
     icon: Phone,
@@ -55,9 +57,12 @@ export default async function ContactPage() {
       <section className="py-28 sm:py-36">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col gap-16">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {INFO.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.06}>
-                <div className="flex flex-col gap-4 border border-maroon-900/10 bg-ivory-50 p-8 h-full">
+            {INFO.map((item, i) => {
+              const cardClasses =
+                "flex flex-col gap-4 border border-maroon-900/10 bg-ivory-50 p-8 h-full transition-colors" +
+                (item.href ? " hover:border-maroon-800/30 hover:bg-maroon-50/40" : "");
+              const content = (
+                <>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-maroon-50 text-maroon-800">
                     <item.icon size={20} strokeWidth={1.5} />
                   </div>
@@ -67,9 +72,26 @@ export default async function ContactPage() {
                       <span key={line}>{line}</span>
                     ))}
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </>
+              );
+
+              return (
+                <Reveal key={item.title} delay={i * 0.06}>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cardClasses}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div className={cardClasses}>{content}</div>
+                  )}
+                </Reveal>
+              );
+            })}
           </div>
 
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-start">
