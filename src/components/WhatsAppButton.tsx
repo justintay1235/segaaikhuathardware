@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ChatBubbleIcon } from "./SocialIcons";
 
-const PHONE = "2348000000000";
+const PHONE = "60123456789";
 const MESSAGE = "Hi Sega, I'd like to ask about your water pumps.";
 
 export default function WhatsAppButton() {

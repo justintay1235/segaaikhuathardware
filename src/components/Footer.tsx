@@ -70,11 +70,11 @@ export default function Footer() {
           <div className="flex flex-col gap-3 text-sm text-ivory-300">
             <span className="flex items-start gap-3">
               <MapPin size={16} className="mt-0.5 shrink-0 text-gold-400" />
-              Plot 14, Industrial Estate Road, Lagos, Nigeria
+              Lot 14, Jalan Perindustrian, Shah Alam, Selangor, Malaysia
             </span>
             <span className="flex items-center gap-3">
               <Phone size={16} className="shrink-0 text-gold-400" />
-              +234 800 000 0000
+              +60 12-345 6789
             </span>
             <span className="flex items-center gap-3">
               <Mail size={16} className="shrink-0 text-gold-400" />

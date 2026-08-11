@@ -81,7 +81,7 @@ export default function ContactForm({ productOptions = [] }: { productOptions?: 
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
                   Phone
                 </span>
-                <input name="phone" type="tel" placeholder="+234 800 000 0000" className={inputClasses} />
+                <input name="phone" type="tel" placeholder="+60 12-345 6789" className={inputClasses} />
               </label>
               <label className="flex flex-col gap-2">
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">

@@ -18,12 +18,12 @@ const INFO = [
   {
     icon: MapPin,
     title: "Visit Us",
-    lines: ["Plot 14, Industrial Estate Road", "Lagos, Nigeria"],
+    lines: ["Lot 14, Jalan Perindustrian", "Shah Alam, Selangor, Malaysia"],
   },
   {
     icon: Phone,
     title: "Call Us",
-    lines: ["+234 800 000 0000", "Mon – Sat, 8am – 6pm"],
+    lines: ["+60 12-345 6789", "Mon – Sat, 8am – 6pm"],
   },
   {
     icon: Mail,
@@ -88,7 +88,7 @@ export default async function ContactPage() {
                       Sega Pumps
                     </span>
                     <span className="text-xs uppercase tracking-[0.3em] text-gold-400">
-                      Head Office &middot; Lagos, Nigeria
+                      Head Office &middot; Shah Alam, Malaysia
                     </span>
                   </div>
                 </div>

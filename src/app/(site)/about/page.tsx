@@ -50,7 +50,7 @@ const TIMELINE = [
   {
     year: "2014",
     title: "Regional Expansion",
-    text: "Sega pumps reach installations across West Africa's industrial corridors.",
+    text: "Sega pumps reach installations across Southeast Asia's industrial corridors.",
   },
   {
     year: "2020",

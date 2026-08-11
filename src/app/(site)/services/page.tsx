@@ -92,7 +92,7 @@ const FAQS = [
       "In-stock residential and agricultural pumps typically ship within 3–5 business days. Industrial systems and custom engineering builds are quoted with a project timeline during your consultation, usually 2–6 weeks depending on scope.",
   },
   {
-    question: "Do you install outside Lagos?",
+    question: "Do you install outside the Klang Valley?",
     answer:
       "Yes — our certified installation crews travel nationwide, and we maintain regional spare parts stock in several states to support faster turnaround on service calls.",
   },
