@@ -1,14 +1,18 @@
+import { Suspense } from "react";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Contact | Sega Pumps",
   description:
     "Get in touch with Sega's engineering team for quotes, custom projects, or support.",
 };
+
+export const dynamic = "force-dynamic";
 
 const INFO = [
   {
@@ -33,7 +37,12 @@ const INFO = [
   },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const products = await prisma.product.findMany({
+    orderBy: { order: "asc" },
+    select: { name: true },
+  });
+
   return (
     <>
       <PageHero
@@ -65,7 +74,9 @@ export default function ContactPage() {
 
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-start">
             <Reveal direction="left">
-              <ContactForm />
+              <Suspense>
+                <ContactForm productOptions={products.map((p) => p.name)} />
+              </Suspense>
             </Reveal>
 
             <Reveal direction="right" delay={0.1}>

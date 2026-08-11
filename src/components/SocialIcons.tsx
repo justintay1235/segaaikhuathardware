@@ -40,3 +40,11 @@ export function LinkedinIcon({ size = 18, className }: IconProps) {
     </svg>
   );
 }
+
+export function ChatBubbleIcon({ size = 18, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" className={className} {...base}>
+      <path d="M4 12a8 8 0 1 1 3.2 6.4L4 20l1.4-3.6A7.96 7.96 0 0 1 4 12Z" />
+    </svg>
+  );
+}

@@ -11,6 +11,7 @@ import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
+import FaqAccordion from "@/components/FaqAccordion";
 
 export const metadata: Metadata = {
   title: "Services | Sega Pumps",
@@ -79,6 +80,34 @@ const PROCESS = [
   },
 ];
 
+const FAQS = [
+  {
+    question: "What warranty comes with a Sega pump?",
+    answer:
+      "Every Sega pump ships with a 5-year manufacturer's warranty covering motor and material defects. Industrial booster systems and custom builds carry the warranty terms agreed in the project proposal.",
+  },
+  {
+    question: "How long does delivery and installation take?",
+    answer:
+      "In-stock residential and agricultural pumps typically ship within 3–5 business days. Industrial systems and custom engineering builds are quoted with a project timeline during your consultation, usually 2–6 weeks depending on scope.",
+  },
+  {
+    question: "Do you install outside Lagos?",
+    answer:
+      "Yes — our certified installation crews travel nationwide, and we maintain regional spare parts stock in several states to support faster turnaround on service calls.",
+  },
+  {
+    question: "What payment options are available?",
+    answer:
+      "We accept bank transfer, and for larger industrial or agricultural projects we can structure milestone-based payment plans tied to delivery and commissioning. Ask your engineer during the proposal stage.",
+  },
+  {
+    question: "Can you service a pump you didn't sell us?",
+    answer:
+      "In most cases, yes. Our AMC and 24/7 support plans cover common pump brands, though parts availability and turnaround may vary. Send us the model details through the contact form and we'll confirm.",
+  },
+];
+
 export default function ServicesPage() {
   return (
     <>
@@ -133,6 +162,18 @@ export default function ServicesPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-28 sm:py-36">
+        <div className="mx-auto max-w-4xl px-6 lg:px-10 flex flex-col gap-16">
+          <SectionHeading
+            eyebrow="Common Questions"
+            title="Before you"
+            italicWord="reach out."
+          />
+          <FaqAccordion items={FAQS} />
         </div>
       </section>
 

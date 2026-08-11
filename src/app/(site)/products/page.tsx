@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import SectionHeading from "@/components/SectionHeading";
 import ProductCard from "@/components/ProductCard";
@@ -37,13 +38,15 @@ export default async function ProductsPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {products.map((product, i) => (
               <Reveal key={product.id} delay={(i % 3) * 0.08}>
-                <ProductCard
-                  icon={getProductIcon(product.icon)}
-                  name={product.name}
-                  tagline={product.tagline}
-                  specs={JSON.parse(product.specsJson)}
-                  imageUrl={product.imageUrl}
-                />
+                <Link href={`/products/${product.id}`}>
+                  <ProductCard
+                    icon={getProductIcon(product.icon)}
+                    name={product.name}
+                    tagline={product.tagline}
+                    specs={JSON.parse(product.specsJson)}
+                    imageUrl={product.imageUrl}
+                  />
+                </Link>
               </Reveal>
             ))}
           </div>

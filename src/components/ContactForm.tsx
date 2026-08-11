@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { submitContact, type ContactState } from "@/app/(site)/contact/actions";
@@ -10,8 +11,15 @@ const inputClasses =
 
 const initialState: ContactState = { success: false };
 
-export default function ContactForm() {
+const EXTRA_INTERESTS = ["Custom Engineering", "Maintenance & Support"];
+
+export default function ContactForm({ productOptions = [] }: { productOptions?: string[] }) {
   const [state, formAction, pending] = useActionState(submitContact, initialState);
+  const searchParams = useSearchParams();
+  const requestedInterest = searchParams.get("interest") ?? "";
+
+  const interestOptions = Array.from(new Set([...productOptions, ...EXTRA_INTERESTS]));
+  const hasMatch = interestOptions.includes(requestedInterest);
 
   return (
     <div className="relative border border-maroon-900/10 bg-ivory-50 p-9 sm:p-12">
@@ -41,6 +49,12 @@ export default function ContactForm() {
             action={formAction}
             className="flex flex-col gap-8"
           >
+            {requestedInterest && (
+              <p className="text-xs uppercase tracking-[0.15em] text-maroon-500">
+                Asking about: <span className="text-maroon-800">{requestedInterest}</span>
+              </p>
+            )}
+
             <div className="grid sm:grid-cols-2 gap-8">
               <label className="flex flex-col gap-2">
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
@@ -73,15 +87,18 @@ export default function ContactForm() {
                 <span className="text-xs uppercase tracking-[0.2em] text-maroon-700/70">
                   Interest
                 </span>
-                <select name="interest" required defaultValue="" className={inputClasses}>
+                <select
+                  name="interest"
+                  required
+                  defaultValue={hasMatch ? requestedInterest : ""}
+                  className={inputClasses}
+                >
                   <option value="" disabled>
                     Select an option
                   </option>
-                  <option>Centrifugal Series</option>
-                  <option>Submersible Series</option>
-                  <option>Solar Series</option>
-                  <option>Custom Engineering</option>
-                  <option>Maintenance & Support</option>
+                  {interestOptions.map((option) => (
+                    <option key={option}>{option}</option>
+                  ))}
                 </select>
               </label>
             </div>

@@ -1,4 +1,5 @@
 import { Award, Clock, ShieldCheck, Users, Wrench } from "lucide-react";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Button from "@/components/Button";
 import SectionHeading from "@/components/SectionHeading";
@@ -175,13 +176,15 @@ export default async function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProducts.map((product, i) => (
               <Reveal key={product.id} delay={i * 0.08}>
-                <ProductCard
-                  icon={getProductIcon(product.icon)}
-                  name={product.name}
-                  tagline={product.tagline}
-                  specs={JSON.parse(product.specsJson)}
-                  imageUrl={product.imageUrl}
-                />
+                <Link href={`/products/${product.id}`}>
+                  <ProductCard
+                    icon={getProductIcon(product.icon)}
+                    name={product.name}
+                    tagline={product.tagline}
+                    specs={JSON.parse(product.specsJson)}
+                    imageUrl={product.imageUrl}
+                  />
+                </Link>
               </Reveal>
             ))}
           </div>
