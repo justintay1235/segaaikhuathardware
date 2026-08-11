@@ -146,7 +146,7 @@ export default function ProductForm({ action, initialValues, submitLabel }: Prod
       <button
         type="submit"
         disabled={pending}
-        className="self-start px-8 py-3.5 text-[0.8rem] uppercase tracking-[0.18em] font-medium bg-maroon-800 text-ivory-50 hover:bg-maroon-950 transition-all duration-500 disabled:opacity-60"
+        className="self-start px-8 py-3.5 text-[0.8rem] uppercase tracking-[0.18em] font-medium bg-maroon-800 text-ivory-50 hover:bg-brand transition-all duration-500 disabled:opacity-60"
       >
         {pending ? "Saving..." : submitLabel}
       </button>

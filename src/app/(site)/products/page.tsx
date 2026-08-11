@@ -54,7 +54,7 @@ export default async function ProductsPage() {
       </section>
 
       {/* Custom engineering CTA */}
-      <section className="py-28 sm:py-36 bg-maroon-950 relative overflow-hidden">
+      <section className="py-28 sm:py-36 bg-brand relative overflow-hidden">
         <div className="absolute inset-0 bg-noise opacity-[0.15]" />
         <div className="relative mx-auto max-w-5xl px-6 lg:px-10 grid md:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
           <div className="flex flex-col gap-6">

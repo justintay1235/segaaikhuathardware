@@ -9,7 +9,7 @@ type PageHeroProps = {
 
 export default function PageHero({ eyebrow, title, italicWord, description }: PageHeroProps) {
   return (
-    <section className="relative bg-maroon-950 pt-40 pb-28 overflow-hidden">
+    <section className="relative bg-brand pt-40 pb-28 overflow-hidden">
       <div className="absolute inset-0 bg-noise opacity-[0.15]" />
       <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-maroon-800/40 blur-3xl" />
       <div className="relative mx-auto max-w-4xl px-6 lg:px-10 flex flex-col items-center text-center gap-5">

@@ -26,6 +26,11 @@
 
   --color-gold-400: #c9a24d;
   --color-gold-500: #b08a35;
+
+  /* Solid brand red for large section backgrounds (hero bands, footer, CTAs) — kept
+     separate from the maroon scale so heading text (which uses maroon-950) stays
+     dark and elegant instead of turning bright red. */
+  --color-brand: #d40000;
 }
 
 @theme inline {
@@ -52,6 +57,8 @@
 
   --color-gold-400: var(--color-gold-400);
   --color-gold-500: var(--color-gold-500);
+
+  --color-brand: var(--color-brand);
 
   --font-display: var(--font-bodoni), "Didot", "Bodoni Moda", Georgia, serif;
   --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;

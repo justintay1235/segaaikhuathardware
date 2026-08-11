@@ -20,7 +20,7 @@ export default async function Footer() {
   });
 
   return (
-    <footer className="bg-maroon-950 text-ivory-100">
+    <footer className="bg-brand text-ivory-100">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-14 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col gap-5">
           <Logo light />

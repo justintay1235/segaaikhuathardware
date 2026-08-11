@@ -19,7 +19,7 @@ export default async function AdminDashboardLayout({
 
   return (
     <div className="min-h-screen flex bg-ivory-100">
-      <aside className="hidden sm:flex w-60 flex-col justify-between bg-maroon-950 text-ivory-100 px-6 py-8">
+      <aside className="hidden sm:flex w-60 flex-col justify-between bg-brand text-ivory-100 px-6 py-8">
         <div className="flex flex-col gap-10">
           <Link href="/" className="font-display italic text-2xl text-ivory-50">
             Sega.

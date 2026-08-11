@@ -173,7 +173,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-28 sm:py-36 bg-maroon-950">
+      <section className="py-28 sm:py-36 bg-brand">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col gap-16">
           <SectionHeading
             light

@@ -111,7 +111,7 @@ export default async function Home() {
       </section>
 
       {/* Stats strip */}
-      <section className="bg-maroon-950 py-16">
+      <section className="bg-brand py-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 grid grid-cols-2 sm:grid-cols-4 gap-10">
           <StatCounter value={25} suffix="+" label="Years of Craft" light />
           <StatCounter value={40} suffix="K+" label="Pumps Delivered" light />
@@ -256,7 +256,7 @@ export default async function Home() {
       </section>
 
       {/* CTA banner */}
-      <section className="relative overflow-hidden bg-maroon-950 py-24">
+      <section className="relative overflow-hidden bg-brand py-24">
         <div className="absolute inset-0 bg-noise opacity-[0.15]" />
         <div className="relative mx-auto max-w-4xl px-6 lg:px-10 flex flex-col items-center text-center gap-8">
           <Reveal>
